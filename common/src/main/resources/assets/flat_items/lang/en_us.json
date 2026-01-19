@@ -1,0 +1,12 @@
+{
+  "flat_items.mod_name": "Flat Items",
+  "flat_items.setting.enabled": "Render Items as Flat",
+  "flat_items.setting.enabled.tooltip": "With this option enabled, items will be rendered in 2D and they will always face the player.",
+  "flat_items.setting.affect_3d": "Affect 3D Models",
+  "flat_items.setting.affect_3d.tooltip": "By default, only 2D items are affected. This option also renders 3D models (such as blocks) as flat.",
+  "flat_items.setting.render_sides": "Render Sides of Items",
+  "flat_items.setting.render_sides.tooltip": "Renders the sides of items whilst still making them face the player. Makes for a great 3D effect!",
+  "flat_items.configuration.title": "Flat Items / Settings",
+  "flat_items.configuration.section.flat.items.client.toml.title": "Flat Items / Client Settings",
+  "flat_items.configuration.section.flat.items.client.toml": "Flat Items / Client Settings"
+}
