@@ -31,7 +31,7 @@ import java.util.List;
         if (!FlatItems.settings().affect3D()) {
             for (BakedQuad quad : quads) if (quad.direction() != Direction.SOUTH
                     && quad.direction() != Direction.NORTH
-                    && Mth.abs(quad.position0().z() - quad.position2().z()) > 0.0625f) {
+                    && Mth.abs(Float.intBitsToFloat(quad.vertices()[2]) - Float.intBitsToFloat(quad.vertices()[18])) > 0.0625f) {
                 return quads;
             }
         }
