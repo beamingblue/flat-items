@@ -13,3 +13,7 @@ _`enabled` / Render Items as Flat_: Enables/disables the mod.
 _`affect_3d` / Affect 3D Models_: Determines whether 3D models like blocks will also be display as flat.
 
 _`render_sides` / Render Sides of Items_: Renders the sides of items whilst still making them face the player. Makes for a nice, subtle 3D effect!
+
+_`enlarge_3d` / Enlarge 3D Models_: Matches the size of flattened 3D models to 2D ones.
+
+_`facing` / Billboard_: Determines whether flattened items will face the player's eyes or the screen.
