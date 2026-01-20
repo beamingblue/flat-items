@@ -60,6 +60,7 @@ public class FlatItemsModMenu implements ModMenuApi {
                     .withTooltip(unused -> Tooltip.create(Component.translatable("flat_items.setting.enlarge_3d.tooltip")))
                     .create(x, layout.getHeaderHeight() + 92, 150, 20, Component.translatable("flat_items.setting.enlarge_3d"), (c, b) -> enlarge3D = b));
             addRenderableWidget(CycleButton.<Settings.Facing>builder(f -> Component.translatable("flat_items.setting.facing." + f.name().toLowerCase(Locale.ENGLISH)))
+                    .withInitialValue(facing)
                     .withTooltip(unused -> Tooltip.create(Component.translatable("flat_items.setting.facing.tooltip")))
                     .withValues(Settings.Facing.values())
                     .create(x, layout.getHeaderHeight() + 120, 150, 20, Component.translatable("flat_items.setting.facing"), (c, f) -> facing = f));
