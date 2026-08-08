@@ -4,10 +4,10 @@ import blue.beaming.flatitems.FlatItems;
 import blue.beaming.flatitems.injected.interfaces.BakedQuadSupplier;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.entity.ItemEntityRenderer;
 import net.minecraft.client.renderer.entity.state.ItemEntityRenderState;
-import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
+import net.minecraft.client.resources.model.geometry.BakedQuad;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import org.joml.Quaternionfc;
@@ -20,7 +20,7 @@ import java.util.List;
 
 @Mixin(ItemEntityRenderer.class) public class MixinItemEntityRenderer {
     // Disgusting, unidiomatic code x3 I hope that it's at least faster than abusing Streams.
-    @Redirect(method = "submit(Lnet/minecraft/client/renderer/entity/state/ItemEntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/CameraRenderState;)V", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;mulPose(Lorg/joml/Quaternionfc;)V"))
+    @Redirect(method = "submit(Lnet/minecraft/client/renderer/entity/state/ItemEntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/level/CameraRenderState;)V", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;mulPose(Lorg/joml/Quaternionfc;)V"))
     private void census(PoseStack instance, Quaternionfc pose, @Local(argsOnly = true) ItemEntityRenderState iers, @Local(argsOnly = true) CameraRenderState crs) {
         if (!FlatItems.settings().enabled() || iers.count == 0) {
             cancel(instance, pose);
@@ -32,8 +32,7 @@ import java.util.List;
         List<BakedQuad>[] lists = ((BakedQuadSupplier) iers.item).flat_items$quads();
 
         for (final var ql : lists) for (final var q : ql) {
-            final var vd = Mth.abs(q.position0().z() - q.position2().z());
-            is3D = vd > 0.0625f;
+            is3D = Mth.abs(q.position0().z() - q.position2().z()) > 0.0625f;
             if (!affect && is3D) {
                 cancel(instance, pose);
                 return;
@@ -55,7 +54,14 @@ import java.util.List;
 
     @Unique private static void flatten(List<BakedQuad>[] quadLists) {
         for (final var ql : quadLists) {
-            ql.removeIf(q -> q.direction() != Direction.SOUTH);
+            final var it = ql.listIterator();
+            while (it.hasNext()) {
+                final var q = it.next();
+                it.remove();
+                if (q.direction() == Direction.SOUTH) {
+                    it.add(new BakedQuad(q.position0(), q.position1(), q.position2(), q.position3(), q.packedUV0(), q.packedUV1(), q.packedUV2(), q.packedUV3(), q.direction(), q.materialInfo()));
+                }
+            }
         }
     }
 

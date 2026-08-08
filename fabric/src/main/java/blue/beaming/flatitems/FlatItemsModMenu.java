@@ -40,7 +40,7 @@ public class FlatItemsModMenu implements ModMenuApi {
         }
 
         @Override public void onClose() {
-            this.minecraft.setScreen(s);
+            this.minecraft.setScreenAndShow(s);
             FlatItemsFabric.updateSettings(new FabricSettings(enabled, affect3D, renderSides, enlarge3D, facing));
         }
 
@@ -48,21 +48,21 @@ public class FlatItemsModMenu implements ModMenuApi {
             super.init();
             var x = width / 2 - 80;
             addRenderableWidget(CycleButton.onOffBuilder(enabled)
-                    .withTooltip(unused -> Tooltip.create(Component.translatable("flat_items.setting.enabled.tooltip")))
-                    .create(x, layout.getHeaderHeight() + 8, 150, 20, Component.translatable("flat_items.setting.enabled"), (c, b) -> enabled = b));
+                    .withTooltip(_ -> Tooltip.create(Component.translatable("flat_items.setting.enabled.tooltip")))
+                    .create(x, layout.getHeaderHeight() + 8, 150, 20, Component.translatable("flat_items.setting.enabled"), (_, b) -> enabled = b));
             addRenderableWidget(CycleButton.onOffBuilder(affect3D)
-                    .withTooltip(unused -> Tooltip.create(Component.translatable("flat_items.setting.affect_3d.tooltip")))
-                    .create(x, layout.getHeaderHeight() + 36, 150, 20, Component.translatable("flat_items.setting.affect_3d"), (c, b) -> affect3D = b));
+                    .withTooltip(_ -> Tooltip.create(Component.translatable("flat_items.setting.affect_3d.tooltip")))
+                    .create(x, layout.getHeaderHeight() + 36, 150, 20, Component.translatable("flat_items.setting.affect_3d"), (_, b) -> affect3D = b));
             addRenderableWidget(CycleButton.onOffBuilder(renderSides)
-                    .withTooltip(unused -> Tooltip.create(Component.translatable("flat_items.setting.render_sides.tooltip")))
-                    .create(x, layout.getHeaderHeight() + 64, 150, 20, Component.translatable("flat_items.setting.render_sides"), (c, b) -> renderSides = b));
+                    .withTooltip(_ -> Tooltip.create(Component.translatable("flat_items.setting.render_sides.tooltip")))
+                    .create(x, layout.getHeaderHeight() + 64, 150, 20, Component.translatable("flat_items.setting.render_sides"), (_, b) -> renderSides = b));
             addRenderableWidget(CycleButton.onOffBuilder(enlarge3D)
-                    .withTooltip(unused -> Tooltip.create(Component.translatable("flat_items.setting.enlarge_3d.tooltip")))
-                    .create(x, layout.getHeaderHeight() + 92, 150, 20, Component.translatable("flat_items.setting.enlarge_3d"), (c, b) -> enlarge3D = b));
+                    .withTooltip(_ -> Tooltip.create(Component.translatable("flat_items.setting.enlarge_3d.tooltip")))
+                    .create(x, layout.getHeaderHeight() + 92, 150, 20, Component.translatable("flat_items.setting.enlarge_3d"), (_, b) -> enlarge3D = b));
             addRenderableWidget(CycleButton.builder(f -> Component.translatable("flat_items.setting.facing." + f.name().toLowerCase(Locale.ENGLISH)), Settings.Facing.SCREEN)
-                    .withTooltip(unused -> Tooltip.create(Component.translatable("flat_items.setting.facing.tooltip")))
+                    .withTooltip(_ -> Tooltip.create(Component.translatable("flat_items.setting.facing.tooltip")))
                     .withValues(Settings.Facing.values())
-                    .create(x, layout.getHeaderHeight() + 120, 150, 20, Component.translatable("flat_items.setting.facing"), (c, f) -> facing = f));
+                    .create(x, layout.getHeaderHeight() + 120, 150, 20, Component.translatable("flat_items.setting.facing"), (_, f) -> facing = f));
             layout.addToFooter(Button.builder(CommonComponents.GUI_DONE, ignored -> onClose()).width(200).build());
             layout.addTitleHeader(Component.translatable("flat_items.configuration.title"), font);
             layout.visitWidgets(this::addRenderableWidget);
