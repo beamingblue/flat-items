@@ -1,6 +1,6 @@
 package blue.beaming.flatitems.injected.interfaces;
 
-import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.resources.model.geometry.BakedQuad;
 
 import java.util.List;
 

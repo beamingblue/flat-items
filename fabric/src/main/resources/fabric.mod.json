@@ -8,8 +8,8 @@
         "${mod_author}"
     ],
     "contact": {
-        "homepage": "https://fabricmc.net/",
-        "sources": "https://github.com/FabricMC/fabric-example-mod"
+        "homepage": "https://www.beaming.blue/",
+        "sources": "https://github.com/beamingblue/flat-items"
     },
     "license": "${license}",
     "icon": "${mod_id}.png",
@@ -17,16 +17,19 @@
     "entrypoints": {
         "client": [
             "blue.beaming.flatitems.FlatItemsFabric"
-        ],
-        "modmenu": [ "blue.beaming.flatitems.FlatItemsModMenu" ]
-},
+        ]
+    },
     "mixins": [
         "${mod_id}.mixins.json"
     ],
     "depends": {
+        "fabricloader": ">=${fabric_loader_version}",
         "fabric-api": "*",
         "minecraft": "~${minecraft_version}",
         "java": ">=${java_version}"
+    },
+    "suggests": {
+        "another-mod": "*"
     }
 }
   
