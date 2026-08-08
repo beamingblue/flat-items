@@ -3,7 +3,7 @@ package blue.beaming.flatitems;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Function3;
 import net.minecraft.client.renderer.entity.state.ItemEntityRenderState;
-import net.minecraft.client.renderer.state.level.CameraRenderState;
+import net.minecraft.client.renderer.state.CameraRenderState;
 import org.joml.Quaternionf;
 
 public interface Settings {
