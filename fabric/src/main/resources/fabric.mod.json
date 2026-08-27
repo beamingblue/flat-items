@@ -15,6 +15,9 @@
     "icon": "${mod_id}.png",
     "environment": "*",
     "entrypoints": {
+	"modmenu": [
+	    "blue.beaming.flatitems.FlatItemsModMenu"
+	    ],
         "client": [
             "blue.beaming.flatitems.FlatItemsFabric"
         ]
@@ -29,7 +32,6 @@
         "java": ">=${java_version}"
     },
     "suggests": {
-        "another-mod": "*"
+        "modmenu": "*"
     }
 }
-  
